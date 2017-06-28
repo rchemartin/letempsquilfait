@@ -94,17 +94,18 @@ main {
   /* ----- details ----- */
 
   .icon{
-    width: 100px;
+    width: 50px;
   }
 
   .bloc-info{
-    @include border-radius(10px)
+    @include border-radius(10px);
+    overflow: hidden;
   }
 
   .blocs{
     @include display-flex();
     @include spaceBetween();
-    margin: 5em auto;
+    margin: 2em auto;
     padding: 2em 4em 0 4em;
   }
 
@@ -115,8 +116,115 @@ main {
   // ASIDE LEFT
   //
 
-  aside{
+  .aside-left{
+    width: 22%;
+    @include display-flex();
+    @include wrap();
+    @include column();
+    @include spaceBetween();
+    article{
+      width: 100%;
+      height: 45%;
 
+      &.infos-pos{
+        padding: 0.5em 2em 6em 2em;
+        @include display-flex();
+        @include column();
+        @include spaceBetween();
+
+        .icon{
+          margin: 0 auto 2em auto;
+        }
+
+        ul{
+          li{
+            margin-bottom: 1em;
+          }
+        }
+      }
+
+      &.sun-hours{
+        padding: 2em;
+        @include display-flex();
+        @include spaceBetween();
+        position: relative;
+
+        div{
+          text-align: center;
+          @include display-flex();
+          @include column();
+          @include justifyCenter();
+          @extend .bold;
+        }
+
+        .sunrise img{
+          padding-bottom: 6px;
+        }
+
+        .sunrise::after{
+          content: "";
+          position: absolute;
+          display: inline-block;
+          height: 80%;
+          width: 2px;
+          background-color: $white;
+          top: 10%;
+          left: 49%;
+        }
+      }
+    }
+  }
+
+  .weather{
+    padding: 2em;
+    width: 40%;
+    @include display-flex();
+    @include column();
+    @include justifyCenter();
+    @include alignCenter();
+    text-align: center;
+    .weather-precisions{
+      font-size: 1.8em;
+    }
+    .temperature{
+      font-size: 6em;
+      @extend .bold;
+      padding: 0.2em 0;
+    }
+    .min-max{
+      @include display-flex();
+      @include spaceBetween();
+    }
+  }
+
+  .aside-right{
+    width: 22%;
+    padding: 0.5em 2em 2em 2em;
+    @include display-flex();
+    @include column();
+    @include spaceBetween();
+
+    .icon{
+      margin: 0 auto 2em auto;
+    }
+
+    .info{
+      margin: 0.5em 0;
+      font-size: 2em;
+    }
+  }
+
+  footer{
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+
+    a{
+      color: white;
+      font-family: "Proxima Reg";
+      text-decoration: none;
+    }
   }
 
 
