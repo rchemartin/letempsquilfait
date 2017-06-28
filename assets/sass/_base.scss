@@ -4,9 +4,120 @@
 
 
 body{
-  overflow-x: hidden;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  color: $white;
+
 }
 
 main {
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../files/img/background/background-ltqf.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.bg-gradient{
+  background-attachment: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrapper {
+  h1{
+    text-indent: -5000px;
+  }
+  max-width: 1280px;
+  margin: 0 auto;
+
+  //
+  // HEADER
+  //
+
+  header {
+    //background: rgba(12,12,12,0.5);
+    @include display-flex();
+    @include spaceBetween();
+    @include alignCenter();
+    padding: 2em 4em 0 4em;
+
+    .logo-ltqf {
+      width: 33%;
+      img{
+        width: 150px;
+      }
+    }
+
+    .city-name{
+      width: 33%;
+      text-align: center;
+    }
+
+    .city-name h2::before{
+      content: "";
+      display: inline-block;
+      height: 25px;
+      width: 35px;
+      background-repeat: no-repeat;
+    }
+
+    .little-location::before{
+      background-image: url('../../files/img/icons/little-location.svg');
+    }
+
+    .little-search::before{
+      background-image: url('../../files/img/icons/little-search.svg');
+    }
+
+
+    .research {
+      @include display-flex();
+      @include justifyEnd;
+      @include alignEnd();
+      width: 33%;
+      text-align: right;
+      input{
+        width: 12em;
+        margin-right: 1em;
+      }
+      img {
+        width: 60px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  /* ----- details ----- */
+
+  .icon{
+    width: 100px;
+  }
+
+  .bloc-info{
+    @include border-radius(10px)
+  }
+
+  .blocs{
+    @include display-flex();
+    @include spaceBetween();
+    margin: 5em auto;
+    padding: 2em 4em 0 4em;
+  }
+
+  /* ----- details ----- */
+
+
+  //
+  // ASIDE LEFT
+  //
+
+  aside{
+
+  }
+
+
 }
