@@ -166,7 +166,7 @@
 
 /* Background gradient */
 @mixin gradient($color1, $color2) {
-  background: linear-gradient( 120deg, $color1, $color2);
+  background: linear-gradient(to right, $color1, $color2);
 }
 
 
