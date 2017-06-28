@@ -162,7 +162,11 @@ main {
   height: 100vh; }
 
 .wrapper {
-  max-width: 1280px;
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   margin: 0 auto;
   /* ----- details ----- */
   /* ----- details ----- */ }
@@ -192,8 +196,8 @@ main {
     .wrapper header .city-name h2::before {
       content: "";
       display: inline-block;
-      height: 25px;
-      width: 35px;
+      height: 20px;
+      width: 25px;
       background-repeat: no-repeat; }
     .wrapper header .little-location::before {
       background-image: url("../../files/img/icons/little-location.svg"); }
@@ -216,6 +220,8 @@ main {
       .wrapper header .research input {
         width: 12em;
         margin-right: 1em; }
+        .wrapper header .research input::placeholder {
+          color: rgba(255, 255, 255, 0.5); }
       .wrapper header .research img {
         width: 60px;
         cursor: pointer; }
@@ -371,14 +377,16 @@ main {
     .wrapper .aside-right .info {
       margin: 0.5em 0;
       font-size: 2em; }
-  .wrapper footer {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center; }
-    .wrapper footer a {
-      color: white;
-      font-family: "Proxima Reg";
-      text-decoration: none; }
+
+footer {
+  width: 100%;
+  left: 0;
+  position: absolute;
+  bottom: 20px;
+  text-align: center; }
+  footer a {
+    color: white;
+    font-family: "Proxima Reg";
+    text-decoration: none; }
 
 /*# sourceMappingURL=style.css.map */

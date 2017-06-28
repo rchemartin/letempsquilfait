@@ -28,11 +28,15 @@ main {
 }
 
 .wrapper {
+  position: absolute;
+  width: 90%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
   h1{
     text-indent: -5000px;
   }
-  max-width: 1280px;
-  margin: 0 auto;
 
   //
   // HEADER
@@ -44,6 +48,7 @@ main {
     @include spaceBetween();
     @include alignCenter();
     padding: 2em 4em 0 4em;
+
 
     .logo-ltqf {
       width: 33%;
@@ -60,8 +65,8 @@ main {
     .city-name h2::before{
       content: "";
       display: inline-block;
-      height: 25px;
-      width: 35px;
+      height: 20px;
+      width: 25px;
       background-repeat: no-repeat;
     }
 
@@ -83,6 +88,9 @@ main {
       input{
         width: 12em;
         margin-right: 1em;
+        &::placeholder{
+          color: rgba(255,255,255, 0.5);
+        }
       }
       img {
         width: 60px;
@@ -214,18 +222,18 @@ main {
     }
   }
 
-  footer{
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
+}
 
-    a{
-      color: white;
-      font-family: "Proxima Reg";
-      text-decoration: none;
-    }
+footer{
+  width: 100%;
+  left: 0;
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+
+  a{
+    color: white;
+    font-family: "Proxima Reg";
+    text-decoration: none;
   }
-
-
 }
