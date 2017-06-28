@@ -162,11 +162,6 @@ main {
   height: 100vh; }
 
 .wrapper {
-  position: absolute;
-  width: 90%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   margin: 0 auto;
   /* ----- details ----- */
   /* ----- details ----- */ }
@@ -243,9 +238,15 @@ main {
     -ms-flex-pack: justify;
     justify-content: space-between;
     margin: 2em auto;
-    padding: 2em 4em 0 4em; }
+    padding: 2em 4em 0 4em;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
   .wrapper .aside-left {
     width: 22%;
+    height: 400px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;

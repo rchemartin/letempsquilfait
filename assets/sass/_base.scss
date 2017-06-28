@@ -28,11 +28,7 @@ main {
 }
 
 .wrapper {
-  position: absolute;
-  width: 90%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+
   margin: 0 auto;
   h1{
     text-indent: -5000px;
@@ -115,6 +111,11 @@ main {
     @include spaceBetween();
     margin: 2em auto;
     padding: 2em 4em 0 4em;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 
   /* ----- details ----- */
@@ -126,6 +127,7 @@ main {
 
   .aside-left{
     width: 22%;
+    height: 400px;
     @include display-flex();
     @include wrap();
     @include column();
