@@ -1,0 +1,73 @@
+//
+//
+// Styles des typos
+//
+//
+
+// Font-face inlude
+
+@font-face {
+  font-family: 'Proxima Thin';
+  src: url('../../files/fonts/proximanovat-thin-webfont.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Light';
+  src: url('../../files/fonts/proximanova-light-webfont.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Reg';
+  src: url('../../files/fonts/proximanova-regular-webfont.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Reg Italic';
+  src: url('../../files/fonts/proximanova-regularitalic-webfont.woff');
+}
+
+@font-face {
+  font-family: 'Proxima Semi-Bold';
+  src: url('../../files/fonts/proximanova-semibold-webfont.woff');
+}
+
+@font-face {
+font-family: 'Proxima Bold';
+  src: url('../../files/fonts/proximanova-bold-webfont.woff');
+}
+
+// Styles
+
+body{
+  font-family: 'Proxima Reg', Arial, sans-serif;
+  font-size: 16px;
+  color: black;
+}
+
+.bold{
+  font-family: 'Proxima Semi-Bold';
+}
+
+.black{
+  font-family: 'Proxima Bold';
+}
+
+.italic{
+  font-family: "Proxima Reg Italic";
+}
+
+.uppercase{
+  text-transform: uppercase;
+}
+
+strong{
+  @extend .bold;
+}
+
+u{
+  text-decoration: underline;
+}
+
+em{
+  @extend .italic;
+}

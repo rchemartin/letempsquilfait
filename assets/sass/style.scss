@@ -1,0 +1,16 @@
+//
+//
+// Importation de tous les fichiers de style
+//
+//
+
+
+// Partials
+@import "partials/_reset.scss";
+@import "partials/_variables.scss";
+@import "partials/_mixins.scss";
+@import "partials/_components.scss";
+@import "partials/_typography.scss";
+
+//Style de base
+@import "_base.scss";
