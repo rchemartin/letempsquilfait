@@ -198,11 +198,22 @@ BREAKPOINTS
     @media (min-width: 1024px) { @content ; }
   }
 
-  @else if $point == tablet {
-    @media (min-width: 768px) { @content ; }
+  @else if $point == tablet-h {
+    @media (max-width: 1024px) { @content ; }
+  }
+
+  @else if $point == tablet-v {
+    @media (max-width: 768px) { @content ; }
   }
 
   @else if $point == mobile {
-    @media (min-width: 480px) { @content ; }
+    @media (max-width: 480px) { @content ; }
+  }
+
+  @else if $point == mobileLandscape {
+    @media screen
+    and (max-width: 768px)
+    and (-webkit-device-pixel-ratio: 2)
+    and (orientation: landscape) { @content ; }
   }
 }

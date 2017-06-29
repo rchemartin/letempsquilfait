@@ -59,8 +59,8 @@ BREAKPOINTS
 .grad-bluesky {
   background: linear-gradient(to right, rgba(54, 209, 220, 0.6), rgba(91, 134, 229, 0.6)); }
 
-.grad-summer {
-  background: linear-gradient(to right, rgba(34, 193, 195, 0.6), rgba(253, 187, 45, 0.6)); }
+.grad-sunset {
+  background: linear-gradient(to right, rgba(75, 54, 11, 0.6), rgba(255, 130, 53, 0.6)); }
 
 .grad-clouds {
   background: linear-gradient(to right, rgba(115, 200, 169, 0.6), rgba(55, 59, 68, 0.6)); }
@@ -84,17 +84,19 @@ BREAKPOINTS
   background: linear-gradient(to right, rgba(8, 87, 158, 0.6), rgba(153, 32, 32, 0.6)); }
 
 input, button {
-  outline: none; }
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none; }
 
 input[type="search"] {
-  -webkit-appearance: none;
   background: transparent;
   border: none;
   font-size: 1em;
   padding: 0.3em 0;
   color: white;
   font-family: 'Proxima Thin';
-  border-bottom: solid #ffffff 1px; }
+  border-bottom: solid transparent 1px;
+  transition: 0.3s border ease-in-out, 0.3s width ease-in-out; }
 
 @font-face {
   font-family: 'Proxima Thin';
@@ -118,6 +120,9 @@ body {
   font-family: 'Proxima Thin', Arial, sans-serif;
   font-size: 16px;
   color: black; }
+  @media (max-width: 480px) {
+    body {
+      font-size: 14px; } }
 
 .bold, strong, .wrapper .aside-left article.sun-hours div, .wrapper .weather .temperature {
   font-family: 'Proxima Reg'; }
@@ -137,6 +142,9 @@ u {
 h2 {
   font-family: 'Proxima Thin';
   font-size: 2.5em; }
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 1.5em; } }
 
 /* ************************************************ */
 /* ------------------ STYLE BASE ------------------ */
@@ -182,12 +190,17 @@ main {
     align-items: center;
     padding: 2em 4em 0 4em; }
     .wrapper header .logo-ltqf {
-      width: 33%; }
+      width: 33%;
+      transition: 0.3s margin ease-in-out; }
       .wrapper header .logo-ltqf img {
         width: 150px; }
+        @media (max-width: 480px) {
+          .wrapper header .logo-ltqf img {
+            width: 80px; } }
     .wrapper header .city-name {
       width: 33%;
-      text-align: center; }
+      text-align: center;
+      transition: 0.3s margin ease-in-out; }
     .wrapper header .city-name h2::before {
       content: "";
       display: inline-block;
@@ -211,15 +224,39 @@ main {
       -ms-flex-align: end;
       align-items: flex-end;
       width: 33%;
-      text-align: right; }
+      text-align: right;
+      transition: 0.3s width ease-in-out; }
       .wrapper header .research input {
         width: 12em;
         margin-right: 1em; }
         .wrapper header .research input::placeholder {
           color: rgba(255, 255, 255, 0.5); }
+        .wrapper header .research input:focus {
+          border-bottom: 1px solid #ffffff; }
+        @media (max-width: 768px) {
+          .wrapper header .research input {
+            width: 0px; } }
       .wrapper header .research img {
         width: 60px;
-        cursor: pointer; }
+        cursor: pointer;
+        transition: 0.3s transform ease-in-out; }
+        @media (min-width: 1024px) {
+          .wrapper header .research img:hover {
+            transform: scale(0.9); } }
+      @media (max-width: 480px) {
+        .wrapper header .research {
+          width: 27%; } }
+    @media (max-width: 480px) {
+      .wrapper header {
+        padding: 1em; } }
+    @media (max-width: 480px) {
+      .wrapper header .rs-move {
+        margin-left: -100%; }
+      .wrapper header .rs-opened {
+        width: 100%; }
+        .wrapper header .rs-opened #city-search {
+          width: 80% !important;
+          border-bottom: 1px solid #ffffff; } }
   .wrapper .icon {
     width: 50px; }
   .wrapper .bloc-info {
@@ -244,8 +281,26 @@ main {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%); }
+    @media (max-width: 768px) {
+      .wrapper .blocs {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column; } }
+    @media (max-width: 480px) {
+      .wrapper .blocs {
+        -webkit-flex-direction: row;
+        -moz-flex-direction: row;
+        -o-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        padding: 1em; } }
   .wrapper .aside-left {
-    width: 22%;
+    width: 24%;
     height: 400px;
     display: -webkit-box;
     display: -webkit-flex;
@@ -265,9 +320,9 @@ main {
     justify-content: space-between; }
     .wrapper .aside-left article {
       width: 100%;
-      height: 45%; }
+      height: 48%; }
       .wrapper .aside-left article.infos-pos {
-        padding: 0.5em 2em 6em 2em;
+        padding: 2em 2em 4em 2em;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -285,16 +340,18 @@ main {
           margin: 0 auto 2em auto; }
         .wrapper .aside-left article.infos-pos ul li {
           margin-bottom: 1em; }
+        @media (max-width: 480px) {
+          .wrapper .aside-left article.infos-pos {
+            display: none; } }
       .wrapper .aside-left article.sun-hours {
         padding: 2em;
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
-        -webkit-box-pack: justify;
-        -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
         position: relative; }
         .wrapper .aside-left article.sun-hours div {
           text-align: center;
@@ -310,7 +367,11 @@ main {
           -webkit-box-pack: center;
           -webkit-justify-content: center;
           -ms-flex-pack: center;
-          justify-content: center; }
+          justify-content: center;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+          -ms-flex-align: center;
+          align-items: center; }
         .wrapper .aside-left article.sun-hours .sunrise img {
           padding-bottom: 6px; }
         .wrapper .aside-left article.sun-hours .sunrise::after {
@@ -321,7 +382,45 @@ main {
           width: 2px;
           background-color: #ffffff;
           top: 10%;
-          left: 49%; }
+          left: 48%; }
+          @media (max-width: 480px) {
+            .wrapper .aside-left article.sun-hours .sunrise::after {
+              height: 2px;
+              width: 100%;
+              margin: 1em 0;
+              position: relative;
+              left: 0; } }
+        @media (max-width: 480px) {
+          .wrapper .aside-left article.sun-hours {
+            width: 100%;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column; } }
+      @media (max-width: 768px) {
+        .wrapper .aside-left article {
+          width: 48.5%;
+          height: 100%; } }
+    @media (max-width: 768px) {
+      .wrapper .aside-left {
+        -webkit-box-ordinal-group: 2;
+        -moz-box-ordinal-group: 2;
+        -ms-flex-order: 2;
+        -webkit-order: 2;
+        order: 2;
+        width: 100%;
+        height: 200px;
+        -webkit-flex-direction: row;
+        -moz-flex-direction: row;
+        -o-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        margin: 1em 0; } }
+    @media (max-width: 480px) {
+      .wrapper .aside-left {
+        width: 48%;
+        height: 200px; } }
   .wrapper .weather {
     padding: 2em;
     width: 40%;
@@ -348,6 +447,9 @@ main {
     .wrapper .weather .temperature {
       font-size: 6em;
       padding: 0.2em 0; }
+      @media (max-width: 480px) {
+        .wrapper .weather .temperature {
+          font-size: 4em; } }
     .wrapper .weather .min-max {
       display: -webkit-box;
       display: -webkit-flex;
@@ -357,9 +459,18 @@ main {
       -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
       justify-content: space-between; }
+    @media (max-width: 768px) {
+      .wrapper .weather {
+        -webkit-box-ordinal-group: 1;
+        -moz-box-ordinal-group: 1;
+        -ms-flex-order: 1;
+        -webkit-order: 1;
+        order: 1;
+        width: 100%;
+        margin-top: 2em; } }
   .wrapper .aside-right {
-    width: 22%;
-    padding: 0.5em 2em 2em 2em;
+    width: 24%;
+    padding: 2em;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -375,10 +486,51 @@ main {
     justify-content: space-between; }
     .wrapper .aside-right .icon {
       margin: 0 auto 2em auto; }
+      @media (max-width: 480px) {
+        .wrapper .aside-right .icon {
+          display: none; } }
     .wrapper .aside-right .info {
       margin: 0.5em 0;
       font-size: 2em; }
+    @media (max-width: 768px) {
+      .wrapper .aside-right {
+        -webkit-box-ordinal-group: 3;
+        -moz-box-ordinal-group: 3;
+        -ms-flex-order: 3;
+        -webkit-order: 3;
+        order: 3;
+        width: 100%; }
+        .wrapper .aside-right .pressure {
+          display: none; } }
+    @media (max-width: 768px) {
+      .wrapper .aside-right {
+        padding: 1em;
+        text-align: center; } }
+    @media (max-width: 480px) {
+      .wrapper .aside-right {
+        width: 48%;
+        margin-top: 1em;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding-top: 2em;
+        height: 200px; } }
+  @media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+    .wrapper {
+      display: none; } }
 
+.rotate-phone {
+  display: none; }
+
+@media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  .rotate-phone {
+    display: block;
+    position: absolute;
+    width: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); } }
 footer {
   width: 100%;
   left: 0;
@@ -389,5 +541,12 @@ footer {
     color: white;
     font-family: "Proxima Reg";
     text-decoration: none; }
+  @media (max-width: 480px) {
+    footer {
+      bottom: 10px;
+      padding: 0 2em; } }
+  @media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+    footer {
+      display: none; } }
 
 /*# sourceMappingURL=style.css.map */

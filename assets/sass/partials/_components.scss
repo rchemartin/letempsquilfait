@@ -11,8 +11,8 @@
   @include gradient(rgba(54, 209, 220, 0.6), rgba(91, 134, 229, 0.6));
 }
 
-.grad-summer{
-  @include gradient(rgba(34, 193, 195, 0.6), rgba(253, 187, 45, 0.6));
+.grad-sunset{
+  @include gradient(rgba(75, 54, 11, 0.6), rgba(255, 130, 53, 0.6));
 }
 
 .grad-clouds{
@@ -49,6 +49,8 @@
 
 input, button{
   outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
 }
 
 
@@ -57,12 +59,12 @@ input, button{
 //INPUTS
 
 input[type="search"]{
-  -webkit-appearance: none;
   background: transparent;
   border: none;
   font-size: 1em;
   padding: 0.3em 0;
   color: white;
   font-family: 'Proxima Thin';
-  border-bottom: solid $white 1px;
+  border-bottom: solid transparent 1px;
+  transition: 0.3s border ease-in-out, 0.3s width ease-in-out;
 }
