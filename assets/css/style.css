@@ -162,11 +162,6 @@ main {
   height: 100vh; }
 
 .wrapper {
-  position: absolute;
-  width: 90%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   margin: 0 auto;
   /* ----- details ----- */
   /* ----- details ----- */ }
@@ -228,10 +223,10 @@ main {
   .wrapper .icon {
     width: 50px; }
   .wrapper .bloc-info {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    border-radius: 10px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
     overflow: hidden; }
   .wrapper .blocs {
     display: -webkit-box;
@@ -243,9 +238,15 @@ main {
     -ms-flex-pack: justify;
     justify-content: space-between;
     margin: 2em auto;
-    padding: 2em 4em 0 4em; }
+    padding: 2em 4em 0 4em;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); }
   .wrapper .aside-left {
     width: 22%;
+    height: 400px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
