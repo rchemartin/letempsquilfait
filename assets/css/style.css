@@ -98,6 +98,16 @@ input[type="search"] {
   border-bottom: solid transparent 1px;
   transition: 0.3s border ease-in-out, 0.3s width ease-in-out; }
 
+.ui-menu {
+  width: 12em; }
+  .ui-menu .ui-menu-item {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000000;
+    padding: 0.3em;
+    cursor: pointer; }
+    .ui-menu .ui-menu-item:hover {
+      background-color: white; }
+
 @font-face {
   font-family: 'Proxima Thin';
   src: url("../../files/fonts/proximanovat-thin-webfont.woff"); }
