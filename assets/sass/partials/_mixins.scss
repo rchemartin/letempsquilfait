@@ -211,9 +211,6 @@ BREAKPOINTS
   }
 
   @else if $point == mobileLandscape {
-    @media screen
-    and (max-width: 768px)
-    and (-webkit-device-pixel-ratio: 2)
-    and (orientation: landscape) { @content ; }
+    @media screen and (max-width: 768px) and (orientation: landscape) { @content ; }
   }
 }

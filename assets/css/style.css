@@ -516,14 +516,14 @@ main {
         justify-content: space-between;
         padding-top: 2em;
         height: 200px; } }
-  @media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  @media screen and (max-width: 768px) and (orientation: landscape) {
     .wrapper {
       display: none; } }
 
 .rotate-phone {
   display: none; }
 
-@media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+@media screen and (max-width: 768px) and (orientation: landscape) {
   .rotate-phone {
     display: block;
     position: absolute;
@@ -545,7 +545,7 @@ footer {
     footer {
       bottom: 10px;
       padding: 0 2em; } }
-  @media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  @media screen and (max-width: 768px) and (orientation: landscape) {
     footer {
       display: none; } }
 
