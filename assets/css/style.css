@@ -98,6 +98,16 @@ input[type="search"] {
   border-bottom: solid transparent 1px;
   transition: 0.3s border ease-in-out, 0.3s width ease-in-out; }
 
+.ui-menu {
+  width: 12em; }
+  .ui-menu .ui-menu-item {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #000000;
+    padding: 0.3em;
+    cursor: pointer; }
+    .ui-menu .ui-menu-item:hover {
+      background-color: white; }
+
 @font-face {
   font-family: 'Proxima Thin';
   src: url("../../files/fonts/proximanovat-thin-webfont.woff"); }
@@ -516,14 +526,14 @@ main {
         justify-content: space-between;
         padding-top: 2em;
         height: 200px; } }
-  @media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  @media screen and (max-width: 768px) and (orientation: landscape) {
     .wrapper {
       display: none; } }
 
 .rotate-phone {
   display: none; }
 
-@media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+@media screen and (max-width: 768px) and (orientation: landscape) {
   .rotate-phone {
     display: block;
     position: absolute;
@@ -545,7 +555,7 @@ footer {
     footer {
       bottom: 10px;
       padding: 0 2em; } }
-  @media screen and (max-width: 768px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  @media screen and (max-width: 768px) and (orientation: landscape) {
     footer {
       display: none; } }
 

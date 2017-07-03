@@ -22,10 +22,9 @@ $(function(){
             source: function(req, response) {
             var results = $.ui.autocomplete.filter(citiesArray, req.term);
             setFirst(results[0]);
-            response(results.slice(0, 10));//for getting 5 results
+            response(results.slice(0, 4));//for getting 5 results
         },
             minLength: 4,
-            autoFocus : true,
             focus: function(event, ui) {
                 event.preventDefault();
                 $(this).val(ui.item.label);
@@ -44,12 +43,15 @@ $(function(){
 
     // traitement clic bouton recherche
     $('#btn-research').click(function(){
-        $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
+        $('.city-h2').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
     })
 
     function setData(event, ui, data){
         // Ville consultée
-        $('.little-location').text(ui.item.label)
+        $('.city-h2').text(ui.item.label)
+        $('.city-h2').toggleClass('little-location');
+        $('.city-h2').toggleClass('little-search');
+        Header.toggleSearch();
 
         // bloc info
         var desc = data['weather'][0]['description']
@@ -84,7 +86,4 @@ $(function(){
 
     }
 
-    function setBackground{
-
-    }
 });
