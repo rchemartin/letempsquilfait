@@ -4,6 +4,13 @@
     <title>Le temps qu'il fait</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta charset="utf-8"/>
+    <!-- Android Viewport height fix-->
+    <script type="text/javascript">
+        var isAndroid = navigator.userAgent.toLowerCase().indexOf("android") > -1; //&& ua.indexOf("mobile");
+        if(isAndroid) {
+            document.write('<meta name="viewport" content="width=device-width,height='+window.innerHeight+', initial-scale=1.0">');
+        }
+    </script>
     <link rel="stylesheet" href="assets/css/style.css"/>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 </head>
