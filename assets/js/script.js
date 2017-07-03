@@ -43,6 +43,44 @@ $(document).ready(function(){
     //           //
     //           //
 
+    var pos = {};
+    function userPosition(position) {
+        pos = {'lat' : position.coords.latitude, 'lon' : position.coords.longitude}
+    }
+    function erreurPosition(error) {
+        var info = "Erreur lors de la géolocalisation : ";
+        switch (error.code) {
+            case error.TIMEOUT:
+                info += "Timeout !";
+                break;
+            case error.PERMISSION_DENIED:
+                info += "Vous n’avez pas donné la permission";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                info += "La position n’a pu être déterminée";
+                break;
+            case error.UNKNOWN_ERROR:
+                info += "Erreur inconnue";
+                break;
+        }
+        console.log(info)
+    }
+
+    if(navigator.geolocation) {
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(userPosition, erreurPosition);
+
+            $.getJSON('http://api.openweathermap.org/data/2.5/weather??lat='+pos['lat']+'&lon='+pos['lon']+'&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
+                setWeather(data)
+            });
+        }
+
+
+    } else {
+
+        alert("La géolocalisation n'est pas disponible")
+
+    }
 
     var city = []
 
@@ -87,23 +125,19 @@ $(document).ready(function(){
 
     // traitement clic bouton recherche
     $('#btn-research').click(function(){
-        $('.city-h2').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
+        console.log($('#city-search').val())
+        $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
     })
 
-    function setData(event, ui, data){
-        // Ville consultée
-        $('.city-h2').text(ui.item.label)
-        $('.city-h2').toggleClass('little-location');
-        $('.city-h2').toggleClass('little-search');
-        Header.toggleSearch();
 
+    function setWeather(data){
         // bloc info
         var desc = data['weather'][0]['description']
         var temp = (data['main']['temp'] - 273.15)
         var temp_min = (data['main']['temp_min'] - 273.15)
         var temp_max = (data['main']['temp_max'] - 273.15)
 
-        $('.weather-precisions').text(desc)
+        $('.weather-precisions').text(desc.charAt(0).toUpperCase() + desc.substring(1).toLowerCase())
         $('.temperature').text(temp.toFixed(1)+' °C')
         $('.temperature_min').text(temp_min.toFixed(1)+' °C')
         $('.temperature_max').text(temp_max.toFixed(1)+' °C')
@@ -112,12 +146,16 @@ $(document).ready(function(){
         var lat = data['coord']['lat']
         var long = data['coord']['lon']
         var sunset = new Date(data['sys']['sunset']*1000);
+        var sunset_h = (sunset.getHours()>9)? sunset.getHours() : "0"+sunset.getHours();
+        var sunset_m = (sunset.getMinutes()>9)? sunset.getMinutes() : "0"+sunset.getMinutes();
         var sunrise = new Date(data['sys']['sunrise']*1000);
+        var sunrise_h = (sunrise.getHours()>9)? sunrise.getHours() : "0"+sunrise.getHours();
+        var sunrise_m = (sunrise.getMinutes()>9)? sunrise.getMinutes() : "0"+sunrise.getMinutes();
 
         $('.lat').text(lat)
         $('.long').text(long)
-        $('.sunrise_data').text(sunrise.getHours()+' h '+sunrise.getMinutes())
-        $('.sunset_data').text(sunset.getHours()+' h '+sunset.getMinutes())
+        $('.sunset_data').text(sunset_h+' h '+sunset_m)
+        $('.sunrise_data').text(sunrise_h+' h '+sunrise_m)
 
         //aside-right
         var humidity = data['main']['humidity']
@@ -128,6 +166,15 @@ $(document).ready(function(){
         $('.wind_speed').text(wind.toFixed(1)+' km/h')
         $('.pressure_data').text(pressure+' hPa')
 
+    }
+    function setData(event, ui, data){
+        // Ville consultée
+        $('.city-h2').text(ui.item.label)
+        $('.city-h2').toggleClass('little-location');
+        $('.city-h2').toggleClass('little-search');
+        Header.toggleSearch();
+
+        setWeather(data);
     }
 
 
