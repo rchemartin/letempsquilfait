@@ -105,8 +105,9 @@ input[type="search"] {
     color: #000000;
     padding: 0.3em;
     cursor: pointer; }
-    .ui-menu .ui-menu-item:hover {
-      background-color: white; }
+    @media (min-width: 1024px) {
+      .ui-menu .ui-menu-item:hover {
+        background-color: white; } }
 
 @font-face {
   font-family: 'Proxima Thin';

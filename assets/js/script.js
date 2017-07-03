@@ -1,5 +1,20 @@
 $(document).ready(function(){
 
+
+    // RESOLVE PROBLEMS EN IOS FOR CLICK TRIGGER
+
+    detectIOSTouch = function() {
+        var UA = navigator.userAgent,
+            iOS = !!(UA.match(/iPad|iPhone/i));
+
+        if (iOS) {
+            $(document).on('touchstart', function (e) {
+                if (typeof jQuery(e.target).hasClass('ui-menu-item') !== 'undefined')
+                    e.target.click();
+            });
+        }
+    }();
+
     var Header = {
         $logo : $('.logo-ltqf'),
         $cityName : $('.city-name'),
@@ -18,7 +33,7 @@ $(document).ready(function(){
         },
     };
 
-    Header.$btnResearch.on("click", Header.toggleSearch);
+    Header.$btnResearch.on("touchstart click", Header.toggleSearch);
     Header.$citySearch.on("keyup", function(e){
         if(e.keyCode == 13){
             Header.toggleSearch();
@@ -32,6 +47,8 @@ $(document).ready(function(){
     //         Header.toggleSearch();
     //     }
     // });
+
+
 
 
 
