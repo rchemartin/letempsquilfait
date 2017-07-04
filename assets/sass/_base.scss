@@ -48,7 +48,7 @@ main {
       width: 33%;
       transition: 0.3s margin ease-in-out;
       img{
-        width: 150px;
+        width: 120px;
         @include breakpoint(mobile){
           width: 80px;
         }
@@ -119,7 +119,7 @@ main {
 
     // ------- animation research input ------- //
 
-    @include breakpoint(mobile) {
+    @include breakpoint(tablet-v) {
       .rs-move {
         margin-left: -100%;
       }
