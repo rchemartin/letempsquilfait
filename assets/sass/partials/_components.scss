@@ -7,7 +7,7 @@
 
 // GRADIENTS
 
-.grad-bluesky{
+.grad-blueSky{
   @include gradient(rgba(54, 209, 220, 0.6), rgba(91, 134, 229, 0.6));
 }
 
@@ -27,6 +27,14 @@
   @include gradient(rgba(242, 252, 254, 0.6), rgba(28, 146, 210, 0.6));
 }
 
+.grad-hot{
+  @include gradient(rgba(244, 107, 69, 0.6), rgba(238, 168, 73, 0.6));
+}
+
+.grad-night{
+  @include gradient(rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.9));
+}
+
 .grad-snow{
   @include gradient(rgba(76, 161, 175, 0.6), rgba(196, 224, 229, 0.6));
 }
@@ -39,7 +47,7 @@
   @include gradient(rgba(17, 17, 17, 0.6), rgba(219, 122, 25, 0.6));
 }
 
-.grad-fetenationale{
+.grad-feteNationale{
   @include gradient(rgba(8, 87, 158, 0.6), rgba(153, 32, 32, 0.6));
 }
 
@@ -67,6 +75,9 @@ input[type="search"]{
   font-family: 'Proxima Thin';
   border-bottom: solid transparent 1px;
   transition: 0.3s border ease-in-out, 0.3s width ease-in-out;
+  @include breakpoint(mobile){
+    font-size: 1.5em;
+  }
 }
 
 
@@ -79,6 +90,9 @@ input[type="search"]{
     color: $black;
     padding: 0.3em;
     cursor: pointer;
+    @include breakpoint(mobile){
+      font-size: 1.5em;
+    }
     @include breakpoint(desktop) {
       &:hover {
         background-color: rgba(255, 255, 255, 1);

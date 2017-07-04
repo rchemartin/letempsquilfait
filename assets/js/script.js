@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 
+
     // RESOLVE PROBLEMS EN IOS FOR CLICK TRIGGER
 
     detectIOSTouch = function() {
@@ -14,6 +15,21 @@ $(document).ready(function(){
             });
         }
     }();
+
+
+
+    // DATE
+
+    var now = new Date();
+    var annee   = now.getFullYear();
+    var mois    = ('0'+(now.getMonth()+1)).slice(-2);
+    var jour    = ('0'+now.getDate()   ).slice(-2);
+    var heure   = ('0'+now.getHours()  ).slice(-2);
+    var minute  = ('0'+now.getMinutes()).slice(-2);
+    var seconde = ('0'+now.getSeconds()).slice(-2);
+
+
+
 
     var Header = {
         $logo : $('.logo-ltqf'),
@@ -150,6 +166,7 @@ $(document).ready(function(){
     function setWeather(data){
         // bloc info
         var desc = data['weather'][0]['description']
+        var descId = data['weather'][0]['id']
         var temp = (data['main']['temp'] - 273.15)
         var temp_min = (data['main']['temp_min'] - 273.15)
         var temp_max = (data['main']['temp_max'] - 273.15)
@@ -183,7 +200,80 @@ $(document).ready(function(){
         $('.wind_speed').text(wind.toFixed(1)+' km/h')
         $('.pressure_data').text(pressure+' hPa')
 
+        // Gradients
+
+        //reset
+
+        var resetGrad = function(weather){
+            $(".bg-gradient").removeClass().addClass("bg-gradient grad-" + weather);
+            $(".infos-pos").removeClass().addClass("infos-pos bloc-info grad-" + weather);
+            $(".sun-hours").removeClass().addClass("sun-hours bloc-info grad-" + weather);
+            $(".weather").removeClass().addClass("weather bloc-info grad-" + weather);
+            $(".aside-right").removeClass().addClass("aside-right bloc-info grad-" + weather);
+        }
+
+        if((descId >= 500 && descId <= 531)
+            || (descId >= 300 && descId <= 321)
+            || (descId >= 200 && descId <= 232)) { //Rain
+            resetGrad("rain");
+        }
+        else if(descId >= 600 && descId <= 622) { //Snow
+            resetGrad("snow");
+        }
+        else if(descId == 731 || descId == 751 || descId == 762) { //Sand
+            resetGrad("sunset");
+        }
+        else if(descId == 800) { //Clear Sky
+            resetGrad("blueSky");
+        }
+        else if((descId >= 801 && descId <= 804)
+            || descId == 701 || descId == 721
+            || descId == 741 || descId == 761
+            || descId == 771 || descId == 781
+            || descId == 711){ //Clouds
+            resetGrad("clouds");
+        }
+        else if(descId >= 900 && descId <= 906) { //Extreme
+            resetGrad("clouds");
+        }
+        else if(descId >= 951 && descId <= 962) { //Additional
+            resetGrad("clouds");
+        }
+
+        //SPECIALS
+
+
+        if(descId == 800 && temp < 5){ //BlueSky & Cold
+            resetGrad("cold");
+        }
+
+        if(descId == 800 && temp >= 28){ //Hot
+            resetGrad("hot");
+        }
+
+        if(( heure+"h"+minute >= (sunrise_h-1)+"h"+sunrise_m ) && ( heure+"h"+minute <= sunrise_h+"h"+sunrise_m )
+        || ( heure+"h"+minute >= (sunset_h-1)+"h"+sunset_m ) && ( heure+"h"+minute <= sunset_h+"h"+sunset_m )){ //Sunrise / Sunset
+            resetGrad("sunset");
+        }
+
+        if(( heure+"h"+minute > sunset_h+"h"+sunset_m ) && ( heure+"h"+minute < (sunrise_h-1)+"h"+sunrise_m )) { //Night
+            resetGrad("night");
+        }
+
+        if(jour+mois == "1407"){ //14 Juillet
+            resetGrad("feteNationale");
+        }
+
+        if(jour+mois == "3110"){ //Halloween
+            resetGrad("halloween");
+        }
+
+        if(jour+mois == "2512"){ //Christmas
+            resetGrad("christmas");
+        }
     }
+
+
     function setData(event, ui, data){
         // Ville consultée
         $('.city-h2').text(ui.item.label)

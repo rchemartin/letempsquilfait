@@ -56,7 +56,7 @@ table {
 /*********************
 BREAKPOINTS
 *********************/
-.grad-bluesky {
+.grad-blueSky {
   background: linear-gradient(to right, rgba(54, 209, 220, 0.6), rgba(91, 134, 229, 0.6)); }
 
 .grad-sunset {
@@ -71,6 +71,12 @@ BREAKPOINTS
 .grad-cold {
   background: linear-gradient(to right, rgba(242, 252, 254, 0.6), rgba(28, 146, 210, 0.6)); }
 
+.grad-hot {
+  background: linear-gradient(to right, rgba(244, 107, 69, 0.6), rgba(238, 168, 73, 0.6)); }
+
+.grad-night {
+  background: linear-gradient(to right, rgba(20, 30, 48, 0.9), rgba(36, 59, 85, 0.9)); }
+
 .grad-snow {
   background: linear-gradient(to right, rgba(76, 161, 175, 0.6), rgba(196, 224, 229, 0.6)); }
 
@@ -80,7 +86,7 @@ BREAKPOINTS
 .grad-halloween {
   background: linear-gradient(to right, rgba(17, 17, 17, 0.6), rgba(219, 122, 25, 0.6)); }
 
-.grad-fetenationale {
+.grad-feteNationale {
   background: linear-gradient(to right, rgba(8, 87, 158, 0.6), rgba(153, 32, 32, 0.6)); }
 
 input, button {
@@ -97,6 +103,9 @@ input[type="search"] {
   font-family: 'Proxima Thin';
   border-bottom: solid transparent 1px;
   transition: 0.3s border ease-in-out, 0.3s width ease-in-out; }
+  @media (max-width: 480px) {
+    input[type="search"] {
+      font-size: 1.5em; } }
 
 .ui-menu {
   width: 12em; }
@@ -105,6 +114,9 @@ input[type="search"] {
     color: #000000;
     padding: 0.3em;
     cursor: pointer; }
+    @media (max-width: 480px) {
+      .ui-menu .ui-menu-item {
+        font-size: 1.5em; } }
     @media (min-width: 1024px) {
       .ui-menu .ui-menu-item:hover {
         background-color: white; } }
@@ -153,6 +165,9 @@ u {
 h2 {
   font-family: 'Proxima Thin';
   font-size: 2.5em; }
+  @media (min-width: 1024px) {
+    h2 {
+      font-size: 3em; } }
   @media (max-width: 480px) {
     h2 {
       font-size: 1.5em; } }
@@ -204,7 +219,7 @@ main {
       width: 33%;
       transition: 0.3s margin ease-in-out; }
       .wrapper header .logo-ltqf img {
-        width: 150px; }
+        width: 120px; }
         @media (max-width: 480px) {
           .wrapper header .logo-ltqf img {
             width: 80px; } }
@@ -260,7 +275,7 @@ main {
     @media (max-width: 480px) {
       .wrapper header {
         padding: 1em; } }
-    @media (max-width: 480px) {
+    @media (max-width: 768px) {
       .wrapper header .rs-move {
         margin-left: -100%; }
       .wrapper header .rs-opened {
