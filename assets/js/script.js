@@ -10,13 +10,42 @@ $(document).ready(function(){
 
         if (iOS) {
             $(document).on('touchstart', function (e) {
-                if (typeof jQuery(e.target).hasClass('ui-menu-item') !== 'undefined')
+                // if (typeof jQuery(e.target).hasClass('ui-menu-item') !== 'undefined') {
                     e.target.click();
+                // }
             });
         }
     }();
 
 
+    // Detect mobile device / tablet device
+
+    function detectmob() {
+        if( navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/webOS/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i)
+            || navigator.userAgent.match(/Windows Phone/i)
+        ){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    // window.addEventListener('touchstart', function onFirstTouch() {
+    //     // we only need to know once that a human touched the screen, so we can stop listening now
+    //     window.removeEventListener('touchstart', onFirstTouch, false);
+    // }, false);
+
+    // window.addEventListener('mouseover', function onFirstHover() {
+    //     window.USER_CAN_HOVER = true;
+    //     window.removeEventListener('mouseover', onFirstHover, false);
+    // }, false);
 
     // DATE
 
@@ -49,12 +78,23 @@ $(document).ready(function(){
         },
     };
 
-    Header.$btnResearch.on("touchstart click", Header.toggleSearch);
-    Header.$citySearch.on("keyup", function(e){
-        if(e.keyCode == 13){
-            Header.toggleSearch();
-        }
-    });
+    // On mobile devices : touchstart / on desktop : click
+    if(detectmob()) {
+        Header.$btnResearch.on("touchstart", Header.toggleSearch);
+        Header.$citySearch.on("keyup", function (e) {
+            if (e.keyCode == 13) {
+                Header.toggleSearch();
+            }
+        });
+    }
+    else {
+        Header.$btnResearch.on("click", Header.toggleSearch);
+        Header.$citySearch.on("keyup", function (e) {
+            if (e.keyCode == 13) {
+                Header.toggleSearch();
+            }
+        });
+    }
 
 
     // Header.$btnResearch.on("touchend click",function(e){
@@ -156,11 +196,13 @@ $(document).ready(function(){
         })
     });
 
-    // traitement clic bouton recherche
-    $('#btn-research').click(function(){
-        console.log($('#city-search').val())
-        $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
-    })
+    // traitement clic bouton recherche / only on desktop
+    if(!detectmob()) {
+        $('#btn-research').click(function () {
+            console.log($('#city-search').val())
+            $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
+        })
+    }
 
 
     function setWeather(data){
