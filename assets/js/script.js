@@ -193,16 +193,19 @@ $(document).ready(function(){
             },
             open: function (event, ui) {
                 var len = $('.ui-autocomplete > li').length;
-                console.log(len)
+                if(len==1){
+                    $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
+                }
             }
         })
     });
-
     // traitement clic bouton recherche / only on desktop
     if(!detectmob()) {
-        $('#btn-research').click(function () {
-            $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
-        })
+        if(!$('#city-search').val() == '') {
+            $('#btn-research').click(function () {
+                $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
+            })
+        }
     }
 
 
