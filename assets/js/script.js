@@ -169,23 +169,7 @@ $(document).ready(function(){
         return city;
     }
 
-    $.getJSON("files/json/cities.json", function(json) {
-
-        var citiesArray = [];
-
-
-        for(var i=0; i<json.length; i++){
-            citiesArray.push({'label' : json[i]['name'], 'value' : json[i]['_id'] });
-        }
-
-        for(var i=0; i<citiesArray.length; i++){
-            var tmp = citiesArray[i]
-            for(var j=i+1; j<citiesArray.length; j++){
-                if(tmp['label'] == citiesArray[j]['label']){
-                    citiesArray.splice(j, 1);
-                }
-            }
-        }
+    $.getJSON("files/json/cities.json", function(citiesArray) {
 
         $( "#city-search" ).autocomplete({
             source: function(req, response) {
