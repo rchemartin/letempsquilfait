@@ -186,7 +186,6 @@ $(document).ready(function(){
                 }
             }
         }
-        console.log(citiesArray)
 
         $( "#city-search" ).autocomplete({
             source: function(req, response) {
@@ -218,7 +217,6 @@ $(document).ready(function(){
     // traitement clic bouton recherche / only on desktop
     if(!detectmob()) {
         $('#btn-research').click(function () {
-            console.log($('#city-search').val())
             $('#city-search').data('ui-autocomplete')._trigger('select', 'autocompleteselect', {item: getFirst()});
         })
     }
