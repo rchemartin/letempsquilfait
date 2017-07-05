@@ -116,10 +116,14 @@ $(document).ready(function(){
     //           //
     //           //
 
+
+    // Chargement par défaut sur Paris
+    $.getJSON('http://api.openweathermap.org/data/2.5/weather?id=2968815&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
+        setWeather(data)
+    });
+
     var pos = {};
-    function userPosition(position) {
-        pos = {'lat' : position.coords.latitude, 'lon' : position.coords.longitude}
-    }
+
     function erreurPosition(error) {
         var info = "Erreur lors de la géolocalisation : ";
         switch (error.code) {
@@ -138,20 +142,21 @@ $(document).ready(function(){
         }
         console.log(info)
     }
-
     if(navigator.geolocation) {
         if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(userPosition, erreurPosition);
+            navigator.geolocation.getCurrentPosition(function(position) {
+                pos = {'lat' : position.coords.latitude, 'lon' : position.coords.longitude}
+                $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+pos['lat']+'&lon='+pos['lon']+'&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
+                    setWeather(data)
+                });
+            }, erreurPosition);
 
-            $.getJSON('http://api.openweathermap.org/data/2.5/weather??lat='+pos['lat']+'&lon='+pos['lon']+'&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
-                setWeather(data)
-            });
         }
 
 
     } else {
 
-        alert("La géolocalisation n'est pas disponible")
+        alert("La géolocalisation n'est pas disponible sur votre navigateur")
 
     }
 
@@ -168,10 +173,20 @@ $(document).ready(function(){
 
         var citiesArray = [];
 
+
         for(var i=0; i<json.length; i++){
             citiesArray.push({'label' : json[i]['name'], 'value' : json[i]['_id'] });
         }
 
+        for(var i=0; i<citiesArray.length; i++){
+            var tmp = citiesArray[i]
+            for(var j=i+1; j<citiesArray.length; j++){
+                if(tmp['label'] == citiesArray[j]['label']){
+                    citiesArray.splice(j, 1);
+                }
+            }
+        }
+        console.log(citiesArray)
 
         $( "#city-search" ).autocomplete({
             source: function(req, response) {
@@ -193,6 +208,10 @@ $(document).ready(function(){
                     setData(event, ui, data)
                 });
             },
+            open: function (event, ui) {
+                var len = $('.ui-autocomplete > li').length;
+                console.log(len)
+            }
         })
     });
 
@@ -207,12 +226,14 @@ $(document).ready(function(){
 
     function setWeather(data){
         // bloc info
+        var city = data['name']
         var desc = data['weather'][0]['description']
         var descId = data['weather'][0]['id']
         var temp = (data['main']['temp'] - 273.15)
         var temp_min = (data['main']['temp_min'] - 273.15)
         var temp_max = (data['main']['temp_max'] - 273.15)
 
+        $('.city-h2').text(city)
         $('.weather-precisions').text(desc.charAt(0).toUpperCase() + desc.substring(1).toLowerCase())
         $('.temperature').text(temp.toFixed(1)+' °C')
         $('.temperature_min').text(temp_min.toFixed(1)+' °C')
@@ -315,16 +336,13 @@ $(document).ready(function(){
         }
     }
 
-
     function setData(event, ui, data){
         // Ville consultée
-        $('.city-h2').text(ui.item.label)
         $('.city-h2').toggleClass('little-location');
         $('.city-h2').toggleClass('little-search');
         Header.toggleSearch();
 
         setWeather(data);
     }
-
 
 });
