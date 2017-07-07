@@ -118,7 +118,8 @@ $(document).ready(function(){
 
 
     // Chargement par défaut sur Paris
-    $.getJSON('http://api.openweathermap.org/data/2.5/weather?id=2968815&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
+
+    $.getJSON('https://api.apixu.com/v1/forecast.json?key=a624dadc8fa94c859dc72212170607&q=Paris&lang=fr', function(data) {
         setWeather(data)
     });
 
@@ -146,7 +147,8 @@ $(document).ready(function(){
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(function(position) {
                 pos = {'lat' : position.coords.latitude, 'lon' : position.coords.longitude}
-                $.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+pos['lat']+'&lon='+pos['lon']+'&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
+                console.log(pos)
+                $.getJSON('https://api.apixu.com/v1/forecast.json?key=a624dadc8fa94c859dc72212170607&q='+pos['lat']+','+pos['lon']+'&lang=fr', function(data) {
                     setWeather(data)
                 });
             }, erreurPosition);
@@ -187,7 +189,7 @@ $(document).ready(function(){
                 event.preventDefault();
                 $("#city-search").val(ui.item.label);
 
-                $.getJSON('http://api.openweathermap.org/data/2.5/weather?id='+ui.item.value+'&appid=bdeb2effcf49c57ba53b0bc4e7cc8d76&lang=fr', function(data) {
+                $.getJSON('https://api.apixu.com/v1/forecast.json?key=a624dadc8fa94c859dc72212170607&lang=fr&q='+ui.item.label, function(data) {
                     setData(event, ui, data)
                 });
             },
@@ -211,12 +213,12 @@ $(document).ready(function(){
 
     function setWeather(data){
         // bloc info
-        var city = data['name']
-        var desc = data['weather'][0]['description']
-        var descId = data['weather'][0]['id']
-        var temp = (data['main']['temp'] - 273.15)
-        var temp_min = (data['main']['temp_min'] - 273.15)
-        var temp_max = (data['main']['temp_max'] - 273.15)
+        var city = data['location']['name']
+        var desc = data['current']['condition']['text']
+        //var descId = data['weather'][0]['id']
+        var temp = data['current']['temp_c']
+        var temp_min = data['forecast']['forecastday'][0]['day']['mintemp_c']
+        var temp_max = data['forecast']['forecastday'][0]['day']['maxtemp_c']
 
         $('.city-h2').text(city)
         $('.weather-precisions').text(desc.charAt(0).toUpperCase() + desc.substring(1).toLowerCase())
@@ -225,24 +227,20 @@ $(document).ready(function(){
         $('.temperature_max').text(temp_max.toFixed(1)+' °C')
 
         // aside-left
-        var lat = data['coord']['lat']
-        var long = data['coord']['lon']
-        var sunset = new Date(data['sys']['sunset']*1000);
-        var sunset_h = (sunset.getHours()>9)? sunset.getHours() : "0"+sunset.getHours();
-        var sunset_m = (sunset.getMinutes()>9)? sunset.getMinutes() : "0"+sunset.getMinutes();
-        var sunrise = new Date(data['sys']['sunrise']*1000);
-        var sunrise_h = (sunrise.getHours()>9)? sunrise.getHours() : "0"+sunrise.getHours();
-        var sunrise_m = (sunrise.getMinutes()>9)? sunrise.getMinutes() : "0"+sunrise.getMinutes();
+        var lat = data['location']['lat']
+        var long = data['location']['lon']
+        var sunset = data['forecast']['forecastday'][0]['astro']['sunset'];
+        var sunrise = data['forecast']['forecastday'][0]['astro']['sunrise'];
 
         $('.lat').text(lat)
         $('.long').text(long)
-        $('.sunset_data').text(sunset_h+' h '+sunset_m)
-        $('.sunrise_data').text(sunrise_h+' h '+sunrise_m)
+        $('.sunset_data').text(sunset)
+        $('.sunrise_data').text(sunrise)
 
         //aside-right
-        var humidity = data['main']['humidity']
-        var wind = (data['wind']['speed']*3.6)
-        var pressure = Math.round(data['main']['pressure'])
+        var humidity = data['current']['humidity']
+        var wind = data['current']['wind_kph']
+        var pressure = data['current']['pressure_mb']
 
         $('.humidity').text(humidity+' %')
         $('.wind_speed').text(wind.toFixed(1)+' km/h')
@@ -260,65 +258,46 @@ $(document).ready(function(){
             $(".aside-right").removeClass().addClass("aside-right bloc-info grad-" + weather);
         }
 
-        if((descId >= 500 && descId <= 531)
-            || (descId >= 300 && descId <= 321)
-            || (descId >= 200 && descId <= 232)) { //Rain
-            resetGrad("rain");
-        }
-        else if(descId >= 600 && descId <= 622) { //Snow
-            resetGrad("snow");
-        }
-        else if(descId == 731 || descId == 751 || descId == 762) { //Sand
-            resetGrad("sunset");
-        }
-        else if(descId == 800) { //Clear Sky
-            resetGrad("blueSky");
-        }
-        else if((descId >= 801 && descId <= 804)
-            || descId == 701 || descId == 721
-            || descId == 741 || descId == 761
-            || descId == 771 || descId == 781
-            || descId == 711){ //Clouds
-            resetGrad("clouds");
-        }
-        else if(descId >= 900 && descId <= 906) { //Extreme
-            resetGrad("clouds");
-        }
-        else if(descId >= 951 && descId <= 962) { //Additional
-            resetGrad("clouds");
-        }
+        // if((descId >= 500 && descId <= 531)
+        //     || (descId >= 300 && descId <= 321)
+        //     || (descId >= 200 && descId <= 232)) { //Rain
+        //     resetGrad("rain");
+        // }
+        // else if(descId >= 600 && descId <= 622) { //Snow
+        //     resetGrad("snow");
+        // }
+        // else if(descId == 731 || descId == 751 || descId == 762) { //Sand
+        //     resetGrad("sunset");
+        // }
+        // else if(descId == 800) { //Clear Sky
+        //     resetGrad("blueSky");
+        // }
+        // else if((descId >= 801 && descId <= 804)
+        //     || descId == 701 || descId == 721
+        //     || descId == 741 || descId == 761
+        //     || descId == 771 || descId == 781
+        //     || descId == 711){ //Clouds
+        //     resetGrad("clouds");
+        // }
+        // else if(descId >= 900 && descId <= 906) { //Extreme
+        //     resetGrad("clouds");
+        // }
+        // else if(descId >= 951 && descId <= 962) { //Additional
+        //     resetGrad("clouds");
+        // }
+        //
+        // //SPECIALS
+        //
+        //
+        // if(descId == 800 && temp < 5){ //BlueSky & Cold
+        //     resetGrad("cold");
+        // }
+        //
+        // if(descId == 800 && temp >= 28){ //Hot
+        //     resetGrad("hot");
+        // }
 
-        //SPECIALS
-
-
-        if(descId == 800 && temp < 5){ //BlueSky & Cold
-            resetGrad("cold");
-        }
-
-        if(descId == 800 && temp >= 28){ //Hot
-            resetGrad("hot");
-        }
-
-        if(( heure+"h"+minute >= (sunrise_h-1)+"h"+sunrise_m ) && ( heure+"h"+minute <= sunrise_h+"h"+sunrise_m )
-        || ( heure+"h"+minute >= (sunset_h-1)+"h"+sunset_m ) && ( heure+"h"+minute <= sunset_h+"h"+sunset_m )){ //Sunrise / Sunset
-            resetGrad("sunset");
-        }
-
-        if(( heure+"h"+minute > sunset_h+"h"+sunset_m ) && ( heure+"h"+minute < (sunrise_h-1)+"h"+sunrise_m )) { //Night
-            resetGrad("night");
-        }
-
-        if(jour+mois == "1407"){ //14 Juillet
-            resetGrad("feteNationale");
-        }
-
-        if(jour+mois == "3110"){ //Halloween
-            resetGrad("halloween");
-        }
-
-        if(jour+mois == "2512"){ //Christmas
-            resetGrad("christmas");
-        }
+        //
     }
 
     function setData(event, ui, data){
